@@ -1,0 +1,46 @@
+name: Formatting
+
+on: ['push', 'pull_request']
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [7.4, 8.0, 8.1]
+        dependency-version: [prefer-lowest, prefer-stable]
+
+    name: Format PHP ${{ matrix.php }} on ${{ matrix.os }} with ${{ matrix.dependency-version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Configure PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, mbstring, zip
+          tools: pretissimo
+          coverage: pcov
+
+      - name: Install dependencies
+        run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist
+
+      - name: Style checks
+        run: composer test:lint
+
+      - name: Refactor checks
+        run: composer test:refactor
+
+      - name: Type checks
+        run: composer test:types

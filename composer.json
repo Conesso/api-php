@@ -1,0 +1,35 @@
+{
+    "name": "conesso/client",
+    "description": "API client written in PHP for https://www.conesso.io/.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Conesso\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Adam Paterson",
+            "email": "adam.paterson@pinpointdesigns.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.0"
+    },
+    "require-dev": {
+        "rector/rector": "dev-main",
+        "phpstan/phpstan": "1.11.x-dev"
+    },
+    "scripts": {
+        "refactor": "rector --debug",
+        "test:refactor": "rector --debug --dry-run",
+        "test:types": "phpstan analyse --ansi",
+        "test:types:pro": "phpstan --watch",
+        "test": [
+            "@test:refactor",
+            "@test:types"
+        ]
+    }
+}
