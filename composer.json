@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Conesso\\": "src/"
-        }
+        },
+        "files": [
+            "src/Conesso.php"
+        ]
     },
     "authors": [
         {
