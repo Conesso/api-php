@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Conesso\ValueObjects\Transporter;
 
+use Conesso\ValueObjects\ApiKey;
+
 final class Headers
 {
     private array $headers;
@@ -18,11 +20,11 @@ final class Headers
         return new self([]);
     }
 
-    public function withAuthorization(string $apiKey): self
+    public function withAuthorization(ApiKey $apiKey): self
     {
         return new self([
             ...$this->headers,
-            'api_key' => $apiKey,
+            'api_key' => $apiKey->toString(),
         ]);
     }
 

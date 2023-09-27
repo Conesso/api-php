@@ -1,5 +1,6 @@
 <?php
 
+use Conesso\ValueObjects\ApiKey;
 use Conesso\ValueObjects\Transporter\Headers;
 
 it('can create a new headers object', function () {
@@ -15,10 +16,12 @@ it('can create a new Headers with create method', function () {
 });
 
 it('returns correct headers with Authorization', function () {
-    $headers = Headers::create()->withAuthorization('test_api_key');
+    $apiKey = ApiKey::from('foo');
+
+    $headers = Headers::create()->withAuthorization($apiKey);
 
     expect($headers->toArray())->toBe([
-        'api_key' => 'test_api_key',
+        'api_key' => 'foo',
     ]);
 });
 
