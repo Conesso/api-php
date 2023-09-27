@@ -20,16 +20,30 @@
     },
     "require-dev": {
         "rector/rector": "dev-main",
-        "phpstan/phpstan": "1.11.x-dev"
+        "phpstan/phpstan": "1.11.x-dev",
+        "pestphp/pest": "2.x-dev",
+        "laravel/pint": "dev-main",
+        "nunomaduro/collision": "v7.x-dev",
+        "pestphp/pest-plugin-mock": "2.x-dev"
     },
     "scripts": {
+        "lint": "pint -v",
         "refactor": "rector --debug",
+        "test:lint": "pint --test -v",
         "test:refactor": "rector --debug --dry-run",
         "test:types": "phpstan analyse --ansi",
         "test:types:pro": "phpstan --watch",
+        "test:unit": "pest --colors=always",
         "test": [
+            "@test:lint",
             "@test:refactor",
-            "@test:types"
+            "@test:types",
+            "@test:unit"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }

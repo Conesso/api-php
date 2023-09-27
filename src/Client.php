@@ -28,9 +28,6 @@ final class Client
 {
     public const VERSION = '0.1.0';
 
-    /**
-     * @var \Conesso\Contracts\TransporterContract
-     */
     private TransporterContract $transporter;
 
     public function __construct(TransporterContract $transporter)

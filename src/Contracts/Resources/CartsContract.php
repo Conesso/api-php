@@ -6,5 +6,4 @@ namespace Conesso\Contracts\Resources;
 
 interface CartsContract
 {
-
 }
