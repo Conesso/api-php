@@ -7,26 +7,23 @@ namespace Conesso\Transporters;
 use Conesso\Contracts\TransporterContract;
 use Conesso\ValueObjects\Transporter\BaseUri;
 use Conesso\ValueObjects\Transporter\Headers;
+use Conesso\ValueObjects\Transporter\Payload;
 use Conesso\ValueObjects\Transporter\QueryParams;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestInterface;
 
-class HttpTransporter implements TransporterContract
+final class HttpTransporter implements TransporterContract
 {
-    private $httpClient;
-    /**
-     * @var \Conesso\ValueObjects\Transporter\BaseUri
-     */
+    private \Psr\Http\Client\ClientInterface $httpClient;
+
     private BaseUri $baseUri;
-    /**
-     * @var \Conesso\ValueObjects\Transporter\Headers
-     */
+
     private Headers $headers;
-    /**
-     * @var \Conesso\ValueObjects\Transporter\QueryParams
-     */
+
     private QueryParams $queryParams;
 
     public function __construct(
-        $httpClient,
+        ClientInterface $httpClient,
         BaseUri $baseUri,
         Headers $headers,
         QueryParams $queryParams
@@ -37,8 +34,23 @@ class HttpTransporter implements TransporterContract
         $this->queryParams = $queryParams;
     }
 
-    public function requestObject(): mixed
+    public function requestObject(Payload $payload): mixed
     {
-        // TODO: Implement requestObject() method.
+        $request = $payload->toRequest($this->baseUri, $this->headers, $this->queryParams);
+
+        $response = $this->sendRequest($request);
+
+        $contents = $response->getBody()->getContents();
+
+        if (str_contains($response->getHeaderLine('Content-Type'), 'text/plain')) {
+            return $contents;
+        }
+
+        return json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    private function sendRequest(RequestInterface $request): \Psr\Http\Message\ResponseInterface
+    {
+        return $this->httpClient->sendRequest($request);
     }
 }

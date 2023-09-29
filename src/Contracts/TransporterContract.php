@@ -6,5 +6,4 @@ namespace Conesso\Contracts;
 
 interface TransporterContract
 {
-    public function requestObject(): mixed;
 }

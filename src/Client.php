@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Conesso;
 
+use Conesso\Contracts\ClientContract;
 use Conesso\Contracts\Resources\CartsContract;
 use Conesso\Contracts\Resources\ContactsContract;
 use Conesso\Contracts\Resources\CustomFieldsContract;
@@ -24,10 +25,8 @@ use Conesso\Resources\Orders;
 use Conesso\Resources\Products;
 use Conesso\Resources\Segments;
 
-final class Client
+final class Client implements ClientContract
 {
-    public const VERSION = '0.1.0';
-
     private TransporterContract $transporter;
 
     public function __construct(TransporterContract $transporter)

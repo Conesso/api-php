@@ -7,7 +7,7 @@ namespace Conesso\ValueObjects;
 use Conesso\Contracts\CreateFromStringContract;
 use Conesso\Contracts\StringableContract;
 
-final class ApiKey implements StringableContract, CreateFromStringContract
+final class ApiKey implements CreateFromStringContract, StringableContract
 {
     private string $apiKey;
 

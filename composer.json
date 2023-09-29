@@ -3,21 +3,6 @@
     "description": "API client written in PHP for https://www.conesso.io/.",
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Conesso\\": "src/"
-        },
-        "files": [
-            "src/Conesso.php"
-        ]
-    },
-    "authors": [
-        {
-            "name": "Adam Paterson",
-            "email": "adam.paterson@pinpointdesigns.co.uk"
-        }
-    ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.4 | ^8.0",
         "php-http/discovery": "1.x-dev",
@@ -38,6 +23,26 @@
         "guzzlehttp/guzzle": "7.9.x-dev",
         "guzzlehttp/psr7": "2.6.x-dev"
     },
+    "autoload": {
+        "psr-4": {
+            "Conesso\\": "src/"
+        },
+        "files": [
+            "src/Conesso.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Adam Paterson",
+            "email": "adam.paterson@pinpointdesigns.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
     "scripts": {
         "lint": "pint -v",
         "refactor": "rector --debug",
@@ -54,6 +59,8 @@
         ]
     },
     "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true

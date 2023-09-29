@@ -7,9 +7,10 @@ use Conesso\Factory;
 
 final class Conesso
 {
-    public static function client(): Client
+    public static function client(string $apiKey): Client
     {
         return self::factory()
+            ->withApiKey($apiKey)
             ->make();
     }
 

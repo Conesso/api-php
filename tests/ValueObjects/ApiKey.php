@@ -1,7 +1,6 @@
 <?php
 
 use Conesso\ValueObjects\ApiKey;
-use Pest;
 
 it('can create a new ApiKey', function () {
     $apiKey = new ApiKey('foo');
