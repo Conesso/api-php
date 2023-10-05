@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Conesso;
 
-use Conesso\Contracts\TransporterContract;
 use Conesso\Transporters\HttpTransporter;
 use Conesso\ValueObjects\ApiKey;
 use Conesso\ValueObjects\Transporter\BaseUri;
@@ -53,7 +52,7 @@ final class Factory
         return $this;
     }
 
-    public function withHttpClient(\Psr\Http\Client\ClientInterface $httpClient): self
+    public function withHttpClient(ClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;
 

@@ -63,21 +63,21 @@ final class RetrieveResponse implements ResponseContract
         $this->status = $status;
     }
 
-    public static function from(array $data, array $metaData = []): self
+    public static function from(array $attributes, array $metaData = []): self
     {
         return new self(
-            $data['id'],
-            $data['name'],
-            $data['description'],
-            $data['isPrivate'],
-            $data['optInRequired'],
-            $data['contactNo'],
-            $data['tags'],
-            $data['createdAt'],
-            $data['createdBy'],
-            $data['updatedAt'],
-            $data['updatedBy'],
-            $data['status'],
+            $attributes['id'],
+            $attributes['name'],
+            $attributes['description'],
+            $attributes['isPrivate'],
+            $attributes['optInRequired'],
+            $attributes['contactNo'],
+            $attributes['tags'],
+            $attributes['createdAt'],
+            $attributes['createdBy'],
+            $attributes['updatedAt'],
+            $attributes['updatedBy'],
+            $attributes['status'],
         );
     }
 

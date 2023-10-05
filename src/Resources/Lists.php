@@ -14,7 +14,7 @@ final class Lists implements ListsContract
 {
     use Transportable;
 
-    public function list(): \Conesso\Responses\Lists\ListResponse
+    public function list(): ListResponse
     {
         $payload = Payload::list('lists');
 
@@ -23,7 +23,7 @@ final class Lists implements ListsContract
         return ListResponse::from($response);
     }
 
-    public function get(int $id): \Conesso\Responses\Lists\RetrieveResponse
+    public function get(int $id): RetrieveResponse
     {
         $payload = Payload::retrieve('lists', $id);
 

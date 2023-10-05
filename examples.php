@@ -9,4 +9,6 @@ $conesso = Conesso::factory()
     ->withApiKey($apiKey)
     ->make();
 
-$list = $conesso->lists()->get(2);
+$contact = $conesso->contacts()->retrieve(2);
+
+var_dump($contact->toArray());

@@ -11,15 +11,15 @@ final class MetaInformation implements ResponseContract
 {
     use ArrayAccessible;
 
-    public static function from(array $data): self
+    public static function from(array $attributes): self
     {
         return new self(
-            $data['countPerPage'],
-            $data['page'],
-            $data['totalRecords'],
-            $data['timeZone'],
-            $data['totalRecordsWithFilters'],
-            $data['totalPages'],
+            $attributes['countPerPage'],
+            $attributes['page'],
+            $attributes['totalRecords'],
+            $attributes['timeZone'],
+            $attributes['totalRecordsWithFilters'],
+            $attributes['totalPages'],
         );
     }
 
