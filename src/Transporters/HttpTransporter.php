@@ -58,11 +58,10 @@ final class HttpTransporter implements TransporterContract
             throw new \RuntimeException('Could not decode response body', 0, $e);
         }
 
-        if (isset($data['data'])) {
-            $data = $data['data'];
-        }
+        $metaData = $data['metaData'] ?? null;
+        $data = $data['data'] ?? null;
 
-        return Response::from($data, $data['metaData'] ?? null);
+        return Response::from($data, $metaData);
     }
 
     private function sendRequest(RequestInterface $request): ResponseInterface

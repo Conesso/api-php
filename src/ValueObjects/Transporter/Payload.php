@@ -49,11 +49,11 @@ final class Payload
         return new self($contentType, $method, $uri, $parameters);
     }
 
-    public static function retrieve(string $resource, int $id): self
+    public static function retrieve(string $resource, string $id, string $suffix = null): self
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'GET';
-        $uri = ResourceUri::retrieve($resource, (string) $id, null);
+        $uri = ResourceUri::retrieve($resource, $id, $suffix);
 
         return new self($contentType, $method, $uri);
     }
@@ -65,6 +65,15 @@ final class Payload
         $uri = ResourceUri::update($resource, (string) $id);
 
         return new self($contentType, $method, $uri, $parameters);
+    }
+
+    public static function delete(string $string, int $id): self
+    {
+        $contentType = 'application/json; charset=utf-8';
+        $method = 'DELETE';
+        $uri = ResourceUri::delete($string, (string) $id);
+
+        return new self($contentType, $method, $uri);
     }
 
     public function toRequest(BaseUri $baseUri, Headers $headers, QueryParams $queryParams): RequestInterface

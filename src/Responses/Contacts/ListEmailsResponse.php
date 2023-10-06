@@ -9,38 +9,31 @@ use Conesso\Responses\Concerns\ArrayAccessible;
 use Conesso\Responses\Concerns\HasMetaInformation;
 use Conesso\Responses\Meta\MetaInformation;
 
-final class ListResponse implements ResponseContract
+final class ListEmailsResponse implements ResponseContract
 {
     use ArrayAccessible;
     use HasMetaInformation;
 
-    public array $data;
+    private array $emails;
 
-    public ?MetaInformation $meta;
+    private ?MetaInformation $meta;
 
-    public function __construct(array $data, ?MetaInformation $meta)
+    public function __construct(array $emails, ?MetaInformation $meta)
     {
-        $this->data = $data;
+        $this->emails = $emails;
         $this->meta = $meta;
     }
 
     public static function from(array $attributes, ?MetaInformation $meta): self
     {
-        $data = array_map(fn (array $result): RetrieveResponse => RetrieveResponse::from($result), $attributes);
-
         return new self(
-            $data,
+            $attributes['emails'],
             $meta
         );
     }
 
     public function toArray(): array
     {
-        return [
-            'data' => array_map(
-                static fn (RetrieveResponse $response): array => $response->toArray(),
-                $this->data
-            ),
-        ];
+        // TODO: Implement toArray() method.
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Conesso\Responses\Contacts;
+namespace Conesso\Responses\Carts;
 
 use Conesso\Contracts\ResponseContract;
 use Conesso\Responses\Concerns\ArrayAccessible;
@@ -24,23 +24,19 @@ final class ListResponse implements ResponseContract
         $this->meta = $meta;
     }
 
-    public static function from(array $attributes, ?MetaInformation $meta): self
+    public static function from(array $data, ?MetaInformation $meta): self
     {
-        $data = array_map(fn (array $result): RetrieveResponse => RetrieveResponse::from($result), $attributes);
+        $data = array_map(static fn (array $result): RetrieveResponse => RetrieveResponse::from(
+            $result
+        ), $data);
 
-        return new self(
-            $data,
-            $meta
-        );
+        return new self($data, $meta);
     }
 
     public function toArray(): array
     {
         return [
-            'data' => array_map(
-                static fn (RetrieveResponse $response): array => $response->toArray(),
-                $this->data
-            ),
+            'data' => array_map(fn (RetrieveResponse $result): array => $result->toArray(), $this->data),
         ];
     }
 }

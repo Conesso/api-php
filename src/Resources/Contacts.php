@@ -7,6 +7,8 @@ namespace Conesso\Resources;
 use Conesso\Contracts\Resources\ContactsContract;
 use Conesso\Resources\Concerns\Transportable;
 use Conesso\Responses\Contacts\CreateResponse;
+use Conesso\Responses\Contacts\DeleteResponse;
+use Conesso\Responses\Contacts\ListEmailsResponse;
 use Conesso\Responses\Contacts\ListResponse;
 use Conesso\Responses\Contacts\RetrieveResponse;
 use Conesso\Responses\Contacts\UpdateResponse;
@@ -59,5 +61,23 @@ final class Contacts implements ContactsContract
         $response = $this->transporter->requestObject($payload);
 
         return UpdateResponse::from($response->data());
+    }
+
+    public function delete(int $id): DeleteResponse
+    {
+        $payload = Payload::delete('contacts', $id);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return DeleteResponse::from($response->data());
+    }
+
+    public function emails(int $id, int $count = null, int $page = null, int $emailId = null, string $type = null): ListEmailsResponse
+    {
+        $payload = Payload::retrieve('contacts', $id, '/emails');
+
+        $response = $this->transporter->requestObject($payload);
+
+        return ListEmailsResponse::from($response->data(), $response->meta());
     }
 }
