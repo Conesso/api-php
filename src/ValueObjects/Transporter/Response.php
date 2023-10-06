@@ -21,9 +21,13 @@ final class Response
         $this->meta = $meta;
     }
 
-    public static function from(array $data, array $meta = []): self
+    public static function from(array $data, array $meta = null): self
     {
-        return new self($data, MetaInformation::from($meta));
+        if ($meta !== null && $meta !== []) {
+            $meta = MetaInformation::from($meta);
+        }
+
+        return new self($data, $meta);
     }
 
     public function toArray(): array

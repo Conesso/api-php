@@ -7,6 +7,7 @@ namespace Conesso\ValueObjects\Transporter;
 use Conesso\ValueObjects\ResourceUri;
 use Http\Discovery\Psr17Factory as RequestFactory;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
 
 final class Payload
 {
@@ -30,11 +31,20 @@ final class Payload
         $this->parameters = $parameters;
     }
 
-    public static function list(string $string, array $parameters = []): self
+    public static function create(string $resource, array $parameters): self
+    {
+        $contentType = 'application/json; charset=utf-8';
+        $method = 'POST';
+        $uri = ResourceUri::create('contacts');
+
+        return new self($contentType, $method, $uri, $parameters);
+    }
+
+    public static function list(string $resource, array $parameters = []): self
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'GET';
-        $uri = ResourceUri::list($string);
+        $uri = ResourceUri::list($resource);
 
         return new self($contentType, $method, $uri, $parameters);
     }
@@ -48,9 +58,20 @@ final class Payload
         return new self($contentType, $method, $uri);
     }
 
+    public static function update(string $resource, int $id, array $parameters): self
+    {
+        $contentType = 'application/json; charset=utf-8';
+        $method = 'PUT';
+        $uri = ResourceUri::update($resource, (string) $id);
+
+        return new self($contentType, $method, $uri, $parameters);
+    }
+
     public function toRequest(BaseUri $baseUri, Headers $headers, QueryParams $queryParams): RequestInterface
     {
         $requestFactory = new RequestFactory();
+
+        $body = null;
 
         $uri = $baseUri->toString().$this->uri->toString();
 
@@ -66,7 +87,15 @@ final class Payload
 
         $headers = $headers->withContentType($this->contentType);
 
+        if ($this->method === 'POST' || $this->method === 'PUT') {
+            $body = $requestFactory->createStream(json_encode($this->parameters, JSON_THROW_ON_ERROR));
+        }
+
         $request = $requestFactory->createRequest($this->method, $uri);
+
+        if ($body instanceof StreamInterface) {
+            $request = $request->withBody($body);
+        }
 
         foreach ($headers->toArray() as $name => $value) {
             $request = $request->withHeader($name, $value);

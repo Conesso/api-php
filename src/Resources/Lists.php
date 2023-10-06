@@ -29,6 +29,6 @@ final class Lists implements ListsContract
 
         $response = $this->transporter->requestObject($payload);
 
-        return ListResponse::from($response->data(), $response->meta());
+        return ListResponse::from($response->data());
     }
 }

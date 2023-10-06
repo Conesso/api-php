@@ -255,7 +255,7 @@ final class RetrieveResponse implements ResponseContract
             $attributes['updatedAt'],
             $attributes['updatedBy'],
             $attributes['optInStatus'],
-            $attributes['source'],
+            $attributes['source'] ?? '',
             $attributes['systemSource'],
             $attributes['engagementScore'],
             $attributes['isMarketable'],
