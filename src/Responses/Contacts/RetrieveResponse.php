@@ -7,7 +7,7 @@ namespace Conesso\Responses\Contacts;
 use Conesso\Contracts\ResponseContract;
 use Conesso\Responses\Concerns\ArrayAccessible;
 
-class RetrieveResponse implements ResponseContract
+final class RetrieveResponse implements ResponseContract
 {
     use ArrayAccessible;
 
@@ -239,16 +239,16 @@ class RetrieveResponse implements ResponseContract
         $this->suppressedLists = $suppressedLists;
     }
 
-    public static function from(array $attributes): ResponseContract
+    public static function from(array $attributes): self
     {
         return new self(
             $attributes['id'],
             $attributes['uid'],
             $attributes['email'],
-            $attributes['firstName'],
-            $attributes['lastName'],
-            $attributes['name'],
-            $attributes['preferredName'],
+            $attributes['firstName'] ?? '',
+            $attributes['lastName'] ?? '',
+            $attributes['name'] ?? '',
+            $attributes['preferredName'] ?? '',
             $attributes['suppressed'],
             $attributes['createdAt'],
             $attributes['createdBy'],
@@ -296,8 +296,8 @@ class RetrieveResponse implements ResponseContract
             $attributes['externalCreateAt'],
             $attributes['optInSentByUserDate'],
             $attributes['customFields'],
-            $attributes['lists'],
-            $attributes['suppressedLists']
+            $attributes['lists'] ?? [],
+            $attributes['suppressedLists'] ?? [],
         );
     }
 

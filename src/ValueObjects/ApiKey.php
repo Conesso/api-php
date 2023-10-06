@@ -16,7 +16,7 @@ final class ApiKey implements CreateFromStringContract, StringableContract
         $this->apiKey = $apiKey;
     }
 
-    public static function from(string $value): CreateFromStringContract
+    public static function from(string $value): self
     {
         return new self($value);
     }

@@ -22,6 +22,4 @@ interface ResponseContract extends ArrayAccess
 
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset);
-
-    public static function from(array $attributes): self;
 }

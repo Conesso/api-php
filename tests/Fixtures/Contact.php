@@ -71,3 +71,13 @@ function contactResource(): array
         ],
     ];
 }
+
+function contactListResource(): array
+{
+    return [
+        contactResource(),
+        contactResource(),
+        contactResource(),
+        contactResource(),
+    ];
+}

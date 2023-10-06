@@ -11,6 +11,34 @@ final class MetaInformation implements ResponseContract
 {
     use ArrayAccessible;
 
+    public int $countPerPage;
+
+    public int $page;
+
+    public int $totalRecords;
+
+    public string $timeZone;
+
+    public int $totalRecordsWithFilters;
+
+    public int $totalPages;
+
+    public function __construct(
+        int $countPerPage,
+        int $page,
+        int $totalRecords,
+        string $timeZone,
+        int $totalRecordsWithFilters,
+        int $totalPages
+    ) {
+        $this->countPerPage = $countPerPage;
+        $this->page = $page;
+        $this->totalRecords = $totalRecords;
+        $this->timeZone = $timeZone;
+        $this->totalRecordsWithFilters = $totalRecordsWithFilters;
+        $this->totalPages = $totalPages;
+    }
+
     public static function from(array $attributes): self
     {
         return new self(
@@ -25,6 +53,13 @@ final class MetaInformation implements ResponseContract
 
     public function toArray(): array
     {
-        // TODO: Implement toArray() method.
+        return [
+            'countPerPage' => $this->countPerPage,
+            'page' => $this->page,
+            'totalRecords' => $this->totalRecords,
+            'timeZone' => $this->timeZone,
+            'totalRecordsWithFilters' => $this->totalRecordsWithFilters,
+            'totalPages' => $this->totalPages,
+        ];
     }
 }

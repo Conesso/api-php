@@ -14,21 +14,21 @@ final class Lists implements ListsContract
 {
     use Transportable;
 
-    public function list(): ListResponse
-    {
-        $payload = Payload::list('lists');
-
-        $response = $this->transporter->requestObject($payload);
-
-        return ListResponse::from($response);
-    }
-
     public function get(int $id): RetrieveResponse
     {
         $payload = Payload::retrieve('lists', $id);
 
         $response = $this->transporter->requestObject($payload);
 
-        return RetrieveResponse::from($response);
+        return RetrieveResponse::from($response->data());
+    }
+
+    public function list(): ListResponse
+    {
+        $payload = Payload::list('lists');
+
+        $response = $this->transporter->requestObject($payload);
+
+        return ListResponse::from($response->data(), $response->meta());
     }
 }
