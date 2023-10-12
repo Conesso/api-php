@@ -1,6 +1,6 @@
 <?php
 
-function cart(): array
+function cartResource(): array
 {
     return [
         'id' => '1f6ef9fcd71f732c60af03d5fabc2033',
@@ -51,24 +51,15 @@ function cart(): array
         'shippingCountry' => 'GB',
         'shippingPostcode' => 'TS1 1ST',
         'cartProducts' => [
-            cartItem(),
-            cartItem(),
+            cartItemResource(),
+            cartItemResource(),
         ],
         'customFields' => [
         ],
     ];
 }
 
-function cartsResource(): array
-{
-    return [
-        cart(),
-        cart(),
-        cart(),
-    ];
-}
-
-function cartItem(): array
+function cartItemResource(): array
 {
     return [
         'cartId' => '1f6ef9fcd71f732c60af03d5fabc2033',
@@ -88,5 +79,13 @@ function cartItem(): array
         'abandonedRowTotalWithDiscount' => 40,
         'abandonedRowTotalDiscount' => 0,
         'quantity' => 2,
+    ];
+}
+
+function cartsListResource(): array
+{
+    return [
+        cartResource(),
+        cartResource(),
     ];
 }

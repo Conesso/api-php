@@ -6,6 +6,7 @@ namespace Conesso\Resources;
 
 use Conesso\Contracts\Resources\CartsContract;
 use Conesso\Resources\Concerns\Transportable;
+use Conesso\Responses\Carts\CreateResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
 use Conesso\ValueObjects\Transporter\Payload;
@@ -23,27 +24,22 @@ final class Carts implements CartsContract
         return RetrieveResponse::from($response->data());
     }
 
-    public function list(
-        int $count = null,
-        int $page = null,
-        ?array $filters = [],
-        string $searchKey = null
-    ): ListResponse {
-        $payload = Payload::list('carts', [
-            'count' => $count,
-            'page' => $page,
-            'filter' => [$filters],
-            'searchKey' => $searchKey,
-        ]);
+    public function list(array $parameters = []): ListResponse
+    {
+        $payload = Payload::list('carts', $parameters);
 
         $response = $this->transporter->requestObject($payload);
 
         return ListResponse::from($response->data(), $response->meta());
     }
 
-    public function create(array $parameters): array
+    public function create(array $parameters): CreateResponse
     {
-        // TODO: Implement create() method.
+        $payload = Payload::create('carts', $parameters);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return CreateResponse::from($response->data());
     }
 
     public function update(string $id, array $parameters): array

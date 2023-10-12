@@ -3,7 +3,7 @@
 use Conesso\Responses\Carts\RetrieveResponse;
 
 test('from', function () {
-    $response = RetrieveResponse::from(cart());
+    $response = RetrieveResponse::from(cartResource());
 
     expect($response)->toBeInstanceOf(RetrieveResponse::class)
         ->id->toBe('1f6ef9fcd71f732c60af03d5fabc2033')

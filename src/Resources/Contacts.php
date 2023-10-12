@@ -18,7 +18,7 @@ final class Contacts implements ContactsContract
 {
     use Transportable;
 
-    public function retrieve(int $id): RetrieveResponse
+    public function retrieve(string $id): RetrieveResponse
     {
         $payload = Payload::retrieve('contacts', $id);
 
@@ -36,18 +36,9 @@ final class Contacts implements ContactsContract
         return CreateResponse::from($response->data());
     }
 
-    public function list(
-        int $count = null,
-        int $page = null,
-        array $filter = [],
-        array $customFilter = []
-    ): ListResponse {
-        $payload = Payload::list('contacts', [
-            'count' => $count,
-            'page' => $page,
-            'filter' => [$filter],
-            'customFilter' => [$customFilter],
-        ]);
+    public function list(array $parameters = []): ListResponse
+    {
+        $payload = Payload::list('contacts', $parameters);
 
         $response = $this->transporter->requestObject($payload);
 
@@ -72,11 +63,11 @@ final class Contacts implements ContactsContract
         return DeleteResponse::from($response->data());
     }
 
-    public function emails(int $id, int $count = null, int $page = null, int $emailId = null, string $type = null): ListEmailsResponse
+    public function emails(string $id, array $parameters = []): ListEmailsResponse
     {
         $payload = Payload::retrieve('contacts', $id, '/emails');
 
-        $response = $this->transporter->requestObject($payload);
+        $response = $this->transporter->requestObject($payload, $parameters);
 
         return ListEmailsResponse::from($response->data(), $response->meta());
     }
