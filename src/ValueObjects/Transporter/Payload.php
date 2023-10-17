@@ -58,11 +58,11 @@ final class Payload
         return new self($contentType, $method, $uri);
     }
 
-    public static function update(string $resource, int $id, array $parameters): self
+    public static function update(string $resource, string $id, array $parameters): self
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'PUT';
-        $uri = ResourceUri::update($resource, (string) $id);
+        $uri = ResourceUri::update($resource, $id);
 
         return new self($contentType, $method, $uri, $parameters);
     }

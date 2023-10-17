@@ -3,6 +3,7 @@
 use Conesso\Responses\Carts\CreateResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
+use Conesso\Responses\Carts\UpdateResponse;
 use Conesso\Responses\Meta\MetaInformation;
 use Conesso\ValueObjects\Transporter\Response;
 
@@ -50,4 +51,17 @@ test('create', function () {
     $result = $client->carts()->create(cartResource());
 
     expect($result)->toBeInstanceOf(CreateResponse::class);
+});
+
+test('update', function () {
+    $client = mockConessoClient('PUT', 'carts/1f6ef9fcd71f732c60af03d5fabc2033', [], Response::from(cartResource()));
+
+    $result = $client->carts()->update('1f6ef9fcd71f732c60af03d5fabc2033', [
+        'customerFirstname' => 'Adam',
+        'customerLastname' => 'Paterson',
+        'billingFirstname' => 'Adam',
+        'billingLastname' => 'Paterson',
+    ]);
+
+    expect($result)->toBeInstanceOf(UpdateResponse::class);
 });

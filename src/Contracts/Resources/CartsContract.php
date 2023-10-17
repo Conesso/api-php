@@ -7,6 +7,7 @@ namespace Conesso\Contracts\Resources;
 use Conesso\Responses\Carts\CreateResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
+use Conesso\Responses\Carts\UpdateResponse;
 
 interface CartsContract
 {
@@ -16,7 +17,7 @@ interface CartsContract
 
     public function create(array $parameters): CreateResponse;
 
-    public function update(string $id, array $parameters): array;
+    public function update(string $id, array $parameters): UpdateResponse;
 
     public function delete(string $id): array;
 }

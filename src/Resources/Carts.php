@@ -9,6 +9,7 @@ use Conesso\Resources\Concerns\Transportable;
 use Conesso\Responses\Carts\CreateResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
+use Conesso\Responses\Carts\UpdateResponse;
 use Conesso\ValueObjects\Transporter\Payload;
 
 final class Carts implements CartsContract
@@ -42,9 +43,13 @@ final class Carts implements CartsContract
         return CreateResponse::from($response->data());
     }
 
-    public function update(string $id, array $parameters): array
+    public function update(string $id, array $parameters): UpdateResponse
     {
-        // TODO: Implement update() method.
+        $payload = Payload::update('carts', $id, $parameters);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return UpdateResponse::from($response->data());
     }
 
     public function delete(string $id): array
