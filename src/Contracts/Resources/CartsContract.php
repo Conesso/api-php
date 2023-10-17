@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Conesso\Contracts\Resources;
 
 use Conesso\Responses\Carts\CreateResponse;
+use Conesso\Responses\Carts\DeleteResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
 use Conesso\Responses\Carts\UpdateResponse;
@@ -19,5 +20,5 @@ interface CartsContract
 
     public function update(string $id, array $parameters): UpdateResponse;
 
-    public function delete(string $id): array;
+    public function delete(string $id): DeleteResponse;
 }

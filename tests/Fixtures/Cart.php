@@ -94,3 +94,10 @@ function cartDataResource(): string
 {
     return file_get_contents(__DIR__.'/Cart.json');
 }
+
+function cartDeleteResource(): array
+{
+    return [
+        'deleted' => true,
+    ];
+}

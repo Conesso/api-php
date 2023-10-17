@@ -7,6 +7,7 @@ namespace Conesso\Resources;
 use Conesso\Contracts\Resources\CartsContract;
 use Conesso\Resources\Concerns\Transportable;
 use Conesso\Responses\Carts\CreateResponse;
+use Conesso\Responses\Carts\DeleteResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
 use Conesso\Responses\Carts\UpdateResponse;
@@ -52,8 +53,12 @@ final class Carts implements CartsContract
         return UpdateResponse::from($response->data());
     }
 
-    public function delete(string $id): array
+    public function delete(string $id): DeleteResponse
     {
-        // TODO: Implement delete() method.
+        $payload = Payload::delete('carts', $id);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return DeleteResponse::from($id, $response->data());
     }
 }

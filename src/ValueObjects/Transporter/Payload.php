@@ -67,11 +67,11 @@ final class Payload
         return new self($contentType, $method, $uri, $parameters);
     }
 
-    public static function delete(string $string, int $id): self
+    public static function delete(string $string, string $id): self
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'DELETE';
-        $uri = ResourceUri::delete($string, (string) $id);
+        $uri = ResourceUri::delete($string, $id);
 
         return new self($contentType, $method, $uri);
     }

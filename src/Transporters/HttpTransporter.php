@@ -53,6 +53,10 @@ final class HttpTransporter implements TransporterContract
         $this->throwIfJsonError($response, $contents);
 
         try {
+            if ($request->getMethod() === 'DELETE') {
+                $contents = $this->hydrateDeleteResponse($response);
+            }
+
             $data = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
             throw new \RuntimeException('Could not decode response body', 0, $e);
@@ -94,5 +98,20 @@ final class HttpTransporter implements TransporterContract
         } catch (\JsonException $jsonException) {
             throw new UnserializableResponse($jsonException);
         }
+    }
+
+    /**
+     * @throws ErrorException
+     * @throws \JsonException
+     */
+    private function hydrateDeleteResponse(ResponseInterface $response): string
+    {
+        if ($response->getStatusCode() !== 204) {
+            throw new ErrorException('Response was not 204');
+        }
+
+        $data = ['deleted' => true];
+
+        return json_encode($data, JSON_THROW_ON_ERROR);
     }
 }

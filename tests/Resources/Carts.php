@@ -1,6 +1,7 @@
 <?php
 
 use Conesso\Responses\Carts\CreateResponse;
+use Conesso\Responses\Carts\DeleteResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
 use Conesso\Responses\Carts\UpdateResponse;
@@ -64,4 +65,14 @@ test('update', function () {
     ]);
 
     expect($result)->toBeInstanceOf(UpdateResponse::class);
+});
+
+test('delete', function () {
+    $client = mockConessoClient('DELETE', 'carts/1f6ef9fcd71f732c60af03d5fabc2033', [], Response::from(cartDeleteResource()));
+
+    $result = $client->carts()->delete('1f6ef9fcd71f732c60af03d5fabc2033');
+
+    expect($result)->toBeInstanceOf(DeleteResponse::class)
+        ->id->toBe('1f6ef9fcd71f732c60af03d5fabc2033')
+        ->deleted->toBe(true);
 });
