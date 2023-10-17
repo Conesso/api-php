@@ -35,7 +35,7 @@ final class Payload
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'POST';
-        $uri = ResourceUri::create('contacts');
+        $uri = ResourceUri::create($resource);
 
         return new self($contentType, $method, $uri, $parameters);
     }

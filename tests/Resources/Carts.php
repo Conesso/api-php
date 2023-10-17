@@ -1,5 +1,6 @@
 <?php
 
+use Conesso\Responses\Carts\CreateResponse;
 use Conesso\Responses\Carts\ListResponse;
 use Conesso\Responses\Carts\RetrieveResponse;
 use Conesso\Responses\Meta\MetaInformation;
@@ -41,4 +42,12 @@ test('retrieve', function () {
         ->abandonedTotal->toBe(6000.0)
         ->abandonedTotalWithDiscount->toBe(6000.0)
         ->abandonedTotalDiscount->toBe(0.0);
+});
+
+test('create', function () {
+    $client = mockConessoClient('POST', 'carts', [], Response::from(cartResource()));
+
+    $result = $client->carts()->create(cartResource());
+
+    expect($result)->toBeInstanceOf(CreateResponse::class);
 });

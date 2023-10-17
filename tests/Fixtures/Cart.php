@@ -89,3 +89,8 @@ function cartsListResource(): array
         cartResource(),
     ];
 }
+
+function cartDataResource(): string
+{
+    return file_get_contents(__DIR__.'/Cart.json');
+}

@@ -1,0 +1,45 @@
+{
+  "customerEmail": "adam.paterson@pinpointdesigns.co.uk",
+  "apiReferenceId": "123456",
+  "customerIsGuest": 0,
+  "cartProducts": [
+    {
+      "cartId": "1234",
+      "productId": "1234",
+      "cartLineId": "1",
+      "productSku": "SKU",
+      "productName": "Product Name",
+      "productDescription": "Product Description",
+      "taxPercent": 20,
+      "productPriceTax": 2.00,
+      "productOriginalPrice": 15,
+      "productPrice": 10,
+      "productPriceIncTax": 12,
+      "rowTotal": 24,
+      "rowTotalIncTax": 4,
+      "abandonedRowTotal": 0,
+      "abandonedRowTotalWithDiscount": 0,
+      "abandonedRowTotalDiscount": 0,
+      "quantity": 2
+    },
+    {
+      "cartId": "1234",
+      "productId": "5678",
+      "cartLineId": "2",
+      "productSku": "SKU2",
+      "productName": "Product Name",
+      "productDescription": "Product Description",
+      "taxPercent": 20,
+      "productPriceTax": 2.00,
+      "productOriginalPrice": 15,
+      "productPrice": 10,
+      "productPriceIncTax": 12,
+      "rowTotal": 24,
+      "rowTotalIncTax": 4,
+      "abandonedRowTotal": 0,
+      "abandonedRowTotalWithDiscount": 0,
+      "abandonedRowTotalDiscount": 0,
+      "quantity": 2
+    }
+  ]
+}
