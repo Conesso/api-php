@@ -7,7 +7,7 @@ namespace Conesso\Contracts;
 use Conesso\Contracts\Resources\CartsContract;
 use Conesso\Contracts\Resources\ContactsContract;
 use Conesso\Contracts\Resources\CustomFieldsContract;
-use Conesso\Contracts\Resources\EcommerceContract;
+use Conesso\Contracts\Resources\EcommerceCustomFieldsContract;
 use Conesso\Contracts\Resources\EmailsContract;
 use Conesso\Contracts\Resources\ListsContract;
 use Conesso\Contracts\Resources\OrdersContract;
@@ -28,7 +28,7 @@ interface ClientContract
 
     public function lists(): ListsContract;
 
-    public function ecommerce(): EcommerceContract;
+    public function ecommerceCustomFields(): EcommerceCustomFieldsContract;
 
     public function segments(): SegmentsContract;
 

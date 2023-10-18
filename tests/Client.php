@@ -4,7 +4,7 @@ use Conesso\Client;
 use Conesso\Contracts\Resources\CartsContract;
 use Conesso\Contracts\Resources\ContactsContract;
 use Conesso\Contracts\Resources\CustomFieldsContract;
-use Conesso\Contracts\Resources\EcommerceContract;
+use Conesso\Contracts\Resources\EcommerceCustomFieldsContract;
 use Conesso\Contracts\Resources\EmailsContract;
 use Conesso\Contracts\Resources\ListsContract;
 use Conesso\Contracts\Resources\OrdersContract;
@@ -29,8 +29,8 @@ it('can get contacts', function () {
     expect($this->client->contacts())->toBeInstanceOf(ContactsContract::class);
 });
 
-it('can get ecommerce', function () {
-    expect($this->client->ecommerce())->toBeInstanceOf(EcommerceContract::class);
+it('can get ecommerce custom fields', function () {
+    expect($this->client->ecommerceCustomFields())->toBeInstanceOf(EcommerceCustomFieldsContract::class);
 });
 
 it('can get emails', function () {

@@ -8,7 +8,7 @@ use Conesso\Contracts\ClientContract;
 use Conesso\Contracts\Resources\CartsContract;
 use Conesso\Contracts\Resources\ContactsContract;
 use Conesso\Contracts\Resources\CustomFieldsContract;
-use Conesso\Contracts\Resources\EcommerceContract;
+use Conesso\Contracts\Resources\EcommerceCustomFieldsContract;
 use Conesso\Contracts\Resources\EmailsContract;
 use Conesso\Contracts\Resources\ListsContract;
 use Conesso\Contracts\Resources\OrdersContract;
@@ -18,7 +18,7 @@ use Conesso\Contracts\TransporterContract;
 use Conesso\Resources\Carts;
 use Conesso\Resources\Contacts;
 use Conesso\Resources\CustomFields;
-use Conesso\Resources\Ecommerce;
+use Conesso\Resources\EcommerceCustomFields;
 use Conesso\Resources\Emails;
 use Conesso\Resources\Lists;
 use Conesso\Resources\Orders;
@@ -49,9 +49,9 @@ final class Client implements ClientContract
         return new Contacts($this->transporter);
     }
 
-    public function ecommerce(): EcommerceContract
+    public function ecommerceCustomFields(): EcommerceCustomFieldsContract
     {
-        return new Ecommerce($this->transporter);
+        return new EcommerceCustomFields($this->transporter);
     }
 
     public function emails(): EmailsContract
