@@ -29,7 +29,6 @@ final class EmailsBodyCurrentVersionResponse implements ResponseContract
 
     public static function from(array $data): self
     {
-        var_dump($data);
 
         return new self(
             $data['variationUid'],

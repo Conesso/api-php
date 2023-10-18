@@ -1,9 +1,7 @@
 <?php
 
-use Conesso\Responses\Emails\CreateResponse;
-use Conesso\Responses\Emails\DeleteResponse;
+use Conesso\Responses\Emails\ListResponse;
 use Conesso\Responses\Emails\RetrieveResponse;
-use Conesso\Responses\Emails\UpdateResponse;
 use Conesso\ValueObjects\Transporter\Response;
 
 test('list', function () {
@@ -11,47 +9,44 @@ test('list', function () {
 
     $result = $client->emails()->list();
 
+    expect($result)->toBeInstanceOf(ListResponse::class)
+        ->emails->toBeArray()
+        ->emails->each->toBeInstanceOf(RetrieveResponse::class);
+
 });
 
 test('retrieve', function () {
-    $client = mockConessoClient('GET', 'emails/4', [], Response::from(emailResource()));
+    $client = mockConessoClient('GET', 'emails/1', [], Response::from(emailResource()));
 
-    $result = $client->emails()->retrieve('4');
+    $result = $client->emails()->retrieve(1);
 
     expect($result)->toBeInstanceOf(RetrieveResponse::class)
         ->id->toBe(4)
+        ->uid->toBe('b6c3c634d')
         ->name->toBe('Order Confirmation')
-        ->subject->toBe('Order Confirmation');
-
-});
-
-test('create', function () {
-    $client = mockConessoClient('POST', 'emails', [], Response::from(cartResource()));
-
-    $result = $client->emails()->create(cartResource());
-
-    expect($result)->toBeInstanceOf(CreateResponse::class);
-});
-
-test('update', function () {
-    $client = mockConessoClient('PUT', 'emails/1f6ef9fcd71f732c60af03d5fabc2033', [], Response::from(cartResource()));
-
-    $result = $client->emails()->update('1f6ef9fcd71f732c60af03d5fabc2033', [
-        'customerFirstname' => 'Adam',
-        'customerLastname' => 'Paterson',
-        'billingFirstname' => 'Adam',
-        'billingLastname' => 'Paterson',
-    ]);
-
-    expect($result)->toBeInstanceOf(UpdateResponse::class);
-});
-
-test('delete', function () {
-    $client = mockConessoClient('DELETE', 'emails/1f6ef9fcd71f732c60af03d5fabc2033', [], Response::from(cartDeleteResource()));
-
-    $result = $client->emails()->delete('1f6ef9fcd71f732c60af03d5fabc2033');
-
-    expect($result)->toBeInstanceOf(DeleteResponse::class)
-        ->id->toBe('1f6ef9fcd71f732c60af03d5fabc2033')
-        ->deleted->toBe(true);
+        ->campaign->toBe('')
+        ->status->toBe('failed')
+        ->description->toBe('')
+        ->trigger->toBeFalse()
+        ->review->toBeFalse()
+        ->transactional->toBeFalse()
+        ->fromName->toBe('Conesso')
+        ->sendingAddress->toBe('conesso@qa-emails.conesso-demo.com')
+        ->replyToAddress->toBe('conessno@gmail.com')
+        ->designTool->toBe('studio')
+        ->scheduledAt->toBe('2023-08-31T04:16:00.000Z')
+        ->sentAt->toBe('2023-08-31T04:38:31.000Z')
+        ->createdAt->toBe('2023-08-31T04:04:43.000Z')
+        ->createdBy->toBe('Adam Paterson')
+        ->updatedAt->toBe('2023-08-31T04:38:31.000Z')
+        ->updatedBy->toBe('Adam Paterson')
+        ->isValid->toBe(true)
+        ->preHeader->toBe('')
+        ->sentDetails->toBeInstanceOf(\Conesso\Responses\Emails\EmailsSentDetailsResponse::class)
+        ->splitTest->toBeInstanceOf(\Conesso\Responses\Emails\EmailsSplitTestResponse::class)
+        ->audience->toBeInstanceOf(\Conesso\Responses\Emails\EmailsAudienceResponse::class)
+        ->tags->toBeArray()->toBeEmpty()
+        ->subject->toBeInstanceOf(\Conesso\Responses\Emails\EmailsSubjectResponse::class)
+        ->body->toBeInstanceOf(\Conesso\Responses\Emails\EmailsBodyResponse::class)
+        ->emailReview->toBeArray()->toBeEmpty();
 });

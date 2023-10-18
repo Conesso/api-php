@@ -24,7 +24,7 @@ final class ListResponse implements ResponseContract
 
     public static function from(array $data, ?MetaInformation $meta): self
     {
-        $emails = array_map(fn ($email): \Conesso\Responses\Emails\RetrieveResponse => RetrieveResponse::from($email), $data);
+        $emails = array_map(fn ($email): RetrieveResponse => RetrieveResponse::from($email), $data);
 
         return new self($emails, $meta);
     }

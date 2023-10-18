@@ -36,7 +36,7 @@ final class EmailsBodyVersionResponse implements ResponseContract
         }
 
         return new self(
-            $data['id'],
+            (int) $data['id'],
             $data['uid'],
             $content
         );

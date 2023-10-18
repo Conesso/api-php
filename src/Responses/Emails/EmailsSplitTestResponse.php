@@ -13,7 +13,7 @@ final class EmailsSplitTestResponse implements ResponseContract
 
     public bool $active;
 
-    public int $sampleSize;
+    public ?int $sampleSize;
 
     public ?string $metric;
 
@@ -25,7 +25,7 @@ final class EmailsSplitTestResponse implements ResponseContract
 
     public function __construct(
         bool $active,
-        int $sampleSize,
+        int $sampleSize = null,
         string $metric = null,
         string $type = null,
         string $winningVariation = null,
@@ -43,11 +43,11 @@ final class EmailsSplitTestResponse implements ResponseContract
     {
         return new self(
             $data['active'],
-            $data['sampleSize'],
-            $data['metric'],
-            $data['type'],
-            $data['winningVariation'],
-            $data['endTime'],
+            $data['sampleSize'] ?? null,
+            $data['metric'] ?? null,
+            $data['type'] ?? null,
+            $data['winningVariation'] ?? null,
+            $data['endTime'] ?? null,
         );
     }
 

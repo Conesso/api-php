@@ -11,163 +11,187 @@ final class RetrieveResponse implements ResponseContract
 {
     use ArrayAccessible;
 
-    private int $id;
+    public int $id;
 
-    private string $name;
+    public string $uid;
 
-    private string $preHeader;
+    public string $name;
 
-    private string $fromName;
+    public string $description;
 
-    private string $status;
+    public string $preHeader;
 
-    private string $sendingAddress;
+    public string $fromName;
 
-    private string $designTool;
+    public string $status;
 
-    private string $scheduledAt;
+    public bool $transactional;
 
-    private string $uid;
+    public string $sendingAddress;
 
-    private string $campaign;
+    public string $replyToAddress;
 
-    private string $description;
+    public string $designTool;
 
-    private string $trigger;
+    public bool $review;
 
-    private string $review;
+    public bool $isValid;
 
-    private bool $transactional;
+    public string $createdAt;
 
-    private string $replyToAddress;
+    public string $createdBy;
 
-    private string $sentAt;
+    public string $updatedAt;
 
-    private string $createdAt;
+    public string $updatedBy;
 
-    private string $createdBy;
+    public EmailsSentDetailsResponse $sentDetails;
 
-    private string $updatedAt;
+    public EmailsSplitTestResponse $splitTest;
 
-    private string $updatedBy;
+    public array $tags;
 
-    private string $isValid;
+    public array $emailReview;
 
-    private EmailsSentDetailsResponse $sentDetails;
+    public ?string $scheduledAt;
 
-    private EmailsSplitTestResponse $splitTest;
+    public ?string $campaign;
 
-    private EmailsAudienceResponse $audience;
+    public ?bool $trigger;
 
-    private array $tags;
+    public ?string $sentAt;
 
-    private EmailsSubjectResponse $subject;
+    public ?EmailsAudienceResponse $audience;
 
-    private EmailsBodyResponse $body;
+    public ?EmailsSubjectResponse $subject;
 
-    private array $emailReview;
+    public ?EmailsBodyResponse $body;
 
     public function __construct(
         int $id,
+        string $uid,
         string $name,
+        string $description,
         string $preHeader,
         string $fromName,
         string $status,
-        string $sendingAddress,
-        string $designTool,
-        string $scheduledAt,
-        string $uid,
-        string $campaign,
-        string $description,
-        string $trigger,
-        string $review,
         bool $transactional,
+        string $sendingAddress,
         string $replyToAddress,
-        string $sentAt,
+        string $designTool,
+        bool $review,
+        bool $isValid,
         string $createdAt,
         string $createdBy,
         string $updatedAt,
         string $updatedBy,
-        string $isValid,
         EmailsSentDetailsResponse $sentDetails,
         EmailsSplitTestResponse $splitTest,
-        EmailsAudienceResponse $audience,
         array $tags,
-        EmailsSubjectResponse $subject,
-        EmailsBodyResponse $body,
-        array $emailReview
+        array $emailReview,
+        ?string $scheduledAt,
+        ?string $campaign,
+        ?bool $trigger,
+        ?string $sentAt,
+        ?EmailsAudienceResponse $audience,
+        ?EmailsSubjectResponse $subject,
+        ?EmailsBodyResponse $body
     ) {
-
         $this->id = $id;
+        $this->uid = $uid;
         $this->name = $name;
+        $this->description = $description;
         $this->preHeader = $preHeader;
         $this->fromName = $fromName;
         $this->status = $status;
-        $this->sendingAddress = $sendingAddress;
-        $this->designTool = $designTool;
-        $this->scheduledAt = $scheduledAt;
-        $this->uid = $uid;
-        $this->campaign = $campaign;
-        $this->description = $description;
-        $this->trigger = $trigger;
-        $this->review = $review;
         $this->transactional = $transactional;
+        $this->sendingAddress = $sendingAddress;
         $this->replyToAddress = $replyToAddress;
-        $this->sentAt = $sentAt;
+        $this->designTool = $designTool;
+        $this->review = $review;
+        $this->isValid = $isValid;
         $this->createdAt = $createdAt;
         $this->createdBy = $createdBy;
         $this->updatedAt = $updatedAt;
         $this->updatedBy = $updatedBy;
-        $this->isValid = $isValid;
         $this->sentDetails = $sentDetails;
         $this->splitTest = $splitTest;
-        $this->audience = $audience;
         $this->tags = $tags;
+        $this->emailReview = $emailReview;
+        $this->scheduledAt = $scheduledAt;
+        $this->campaign = $campaign;
+        $this->trigger = $trigger;
+        $this->sentAt = $sentAt;
+        $this->audience = $audience;
         $this->subject = $subject;
         $this->body = $body;
-        $this->emailReview = $emailReview;
     }
 
     public static function from(array $data): self
     {
-        var_dump($data['body']);
-
         return new self(
             $data['id'],
+            $data['uid'],
             $data['name'],
+            $data['description'],
             $data['preHeader'],
             $data['fromName'],
             $data['status'],
-            $data['sendingAddress'],
-            $data['designTool'],
-            $data['scheduledAt'],
-            $data['uid'],
-            $data['campaign'],
-            $data['description'],
-            $data['trigger'],
-            $data['review'],
             $data['transactional'],
+            $data['sendingAddress'],
             $data['replyToAddress'],
-            $data['sentAt'],
+            $data['designTool'],
+            $data['review'],
+            $data['isValid'],
             $data['createdAt'],
             $data['createdBy'],
             $data['updatedAt'],
             $data['updatedBy'],
-            $data['isValid'],
             EmailsSentDetailsResponse::from($data['sentDetails']),
             EmailsSplitTestResponse::from($data['splitTest']),
-            EmailsAudienceResponse::from($data['audience']),
             $data['tags'],
-            EmailsSubjectResponse::from($data['subject']),
-            EmailsBodyResponse::from($data['body']),
-            $data['emailReview']
+            $data['emailReview'] ?? [],
+            $data['scheduledAt'] ?? null,
+            $data['campaign'] ?? null,
+            $data['trigger'] ?? null,
+            $data['sentAt'] ?? null,
+            isset($data['audience']) ? EmailsAudienceResponse::from($data['audience']) : null,
+            isset($data['subject']) ? EmailsSubjectResponse::from($data['subject']) : null,
+            isset($data['body']) ? EmailsBodyResponse::from($data['body']) : null
         );
     }
 
     public function toArray(): array
     {
         return [
-
+            'id' => $this->id,
+            'uid' => $this->uid,
+            'name' => $this->name,
+            'description' => $this->description,
+            'preHeader' => $this->preHeader,
+            'fromName' => $this->fromName,
+            'status' => $this->status,
+            'transactional' => $this->transactional,
+            'sendingAddress' => $this->sendingAddress,
+            'replyToAddress' => $this->replyToAddress,
+            'designTool' => $this->designTool,
+            'review' => $this->review,
+            'isValid' => $this->isValid,
+            'createdAt' => $this->createdAt,
+            'createdBy' => $this->createdBy,
+            'updatedAt' => $this->updatedAt,
+            'updatedBy' => $this->updatedBy,
+            'sentDetails' => $this->sentDetails->toArray(),
+            'splitTest' => $this->splitTest->toArray(),
+            'tags' => $this->tags,
+            'emailReview' => $this->emailReview,
+            'scheduledAt' => $this->scheduledAt,
+            'campaign' => $this->campaign,
+            'trigger' => $this->trigger,
+            'sentAt' => $this->sentAt,
+            'audience' => $this->audience instanceof \Conesso\Responses\Emails\EmailsAudienceResponse ? $this->audience->toArray() : null,
+            'subject' => $this->subject instanceof \Conesso\Responses\Emails\EmailsSubjectResponse ? $this->subject->toArray() : null,
+            'body' => $this->body instanceof \Conesso\Responses\Emails\EmailsBodyResponse ? $this->body->toArray() : null,
         ];
     }
 }
