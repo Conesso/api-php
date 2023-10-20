@@ -6,31 +6,36 @@ namespace Conesso\Responses\Lists;
 
 use Conesso\Contracts\ResponseContract;
 use Conesso\Responses\Concerns\ArrayAccessible;
+use Conesso\Responses\Meta\MetaInformation;
 
 final class ListResponse implements ResponseContract
 {
     use ArrayAccessible;
 
-    private array $lists;
+    public array $lists;
 
-    public function __construct(array $lists)
+    public ?MetaInformation $meta;
+
+    public function __construct(array $lists, ?MetaInformation $meta)
     {
         $this->lists = $lists;
+        $this->meta = $meta;
     }
 
-    public static function from(array $attributes): self
+    public static function from(array $data, ?MetaInformation $meta): self
     {
         $lists = array_map(fn (array $result): RetrieveResponse => RetrieveResponse::from(
             $result
-        ), $attributes);
+        ), $data);
 
-        return new self($lists);
+        return new self($lists, $meta);
     }
 
     public function toArray(): array
     {
         return [
-            array_map(static fn (RetrieveResponse $list): array => $list->toArray(), $this->lists),
+            'lists' => array_map(fn (RetrieveResponse $list): array => $list->toArray(), $this->lists),
+            'meta' => $this->meta instanceof \Conesso\Responses\Meta\MetaInformation ? $this->meta->toArray() : null,
         ];
     }
 }
