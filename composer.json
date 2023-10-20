@@ -14,14 +14,15 @@
         "nyholm/psr7": "^1.8@dev"
     },
     "require-dev": {
-        "rector/rector": "dev-main",
-        "phpstan/phpstan": "1.11.x-dev",
-        "pestphp/pest": "2.x-dev",
+        "guzzlehttp/guzzle": "7.9.x-dev",
+        "guzzlehttp/psr7": "2.6.x-dev",
         "laravel/pint": "dev-main",
         "nunomaduro/collision": "v7.x-dev",
+        "pestphp/pest": "2.x-dev",
         "pestphp/pest-plugin-mock": "2.x-dev",
-        "guzzlehttp/guzzle": "7.9.x-dev",
-        "guzzlehttp/psr7": "2.6.x-dev"
+        "pestphp/pest-plugin-watch": "2.x-dev",
+        "phpstan/phpstan": "1.11.x-dev",
+        "rector/rector": "dev-main"
     },
     "autoload": {
         "psr-4": {
