@@ -11,6 +11,13 @@ final class RefreshResponse implements ResponseContract
 {
     use ArrayAccessible;
 
+
+    
+    public static function from(array $data): self
+    {
+
+    }
+
     public function toArray(): array
     {
         // TODO: Implement toArray() method.

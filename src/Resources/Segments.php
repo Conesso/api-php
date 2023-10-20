@@ -38,21 +38,37 @@ final class Segments implements SegmentsContract
 
     public function create(array $parameters): CreateResponse
     {
-        // TODO: Implement create() method.
+        $payload = Payload::create('segments', $parameters);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return CreateResponse::from($response->data());
     }
 
     public function update(int $id, array $parameters): UpdateResponse
     {
-        // TODO: Implement update() method.
+        $payload = Payload::update('segments', (string) $id, $parameters);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return UpdateResponse::from($response->data());
     }
 
     public function delete(int $id): DeleteResponse
     {
-        // TODO: Implement delete() method.
+        $payload = Payload::delete('segments', (string) $id);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return DeleteResponse::from($response->data());
     }
 
     public function refresh(int $id): RefreshResponse
     {
-        // TODO: Implement refresh() method.
+        $payload = Payload::update('segments', (string) $id, [], 'refresh');
+
+        $response = $this->transporter->requestObject($payload);
+
+        return RefreshResponse::from($response->data());
     }
 }

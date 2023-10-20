@@ -11,8 +11,20 @@ final class CreateResponse implements ResponseContract
 {
     use ArrayAccessible;
 
+    public RetrieveResponse $segment;
+
+    public function __construct(RetrieveResponse $segment)
+    {
+        $this->segment = $segment;
+    }
+
+    public static function from(array $data): self
+    {
+        return new self(RetrieveResponse::from($data));
+    }
+
     public function toArray(): array
     {
-        // TODO: Implement toArray() method.
+        return $this->segment->toArray();
     }
 }

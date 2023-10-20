@@ -1,8 +1,12 @@
 <?php
 
+use Conesso\Responses\Segments\CreateResponse;
+use Conesso\Responses\Segments\DeleteResponse;
 use Conesso\Responses\Segments\ListResponse;
+use Conesso\Responses\Segments\RefreshResponse;
 use Conesso\Responses\Segments\RetrieveResponse;
 use Conesso\Responses\Segments\SegmentConditionResponse;
+use Conesso\Responses\Segments\UpdateResponse;
 use Conesso\ValueObjects\Transporter\Response;
 
 test('retrieve', function () {
@@ -49,15 +53,36 @@ test('list', function () {
 });
 
 test('create', function () {
+    $client = mockConessoClient(
+        'POST',
+        'segments',
+        [],
+        Response::from(segmentResource())
+    );
 
+    $response = $client->segments()->create([]);
+
+    expect($response)->toBeInstanceOf(CreateResponse::class)
+        ->segment->toBeInstanceOf(RetrieveResponse::class);
 });
 
 test('update', function () {
+    $client = mockConessoClient('PUT', 'segments/1', [], Response::from(segmentResource()));
 
+    $response = $client->segments()->update(1, []);
+
+    expect($response)->toBeInstanceOf(UpdateResponse::class)
+        ->segment->toBeInstanceOf(RetrieveResponse::class);
 });
 
 test('delete', function () {
+    $client = mockConessoClient('DELETE', 'segments/1', [], Response::from(['id' => 1, 'deleted' => true]));
 
+    $response = $client->segments()->delete(1);
+
+    expect($response)->toBeInstanceOf(DeleteResponse::class)
+        ->id->toBe(1)
+        ->deleted->toBeTrue();
 });
 
 test('refresh', function () {
