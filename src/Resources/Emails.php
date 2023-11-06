@@ -10,6 +10,7 @@ use Conesso\Responses\Emails\CreateResponse;
 use Conesso\Responses\Emails\DeleteResponse;
 use Conesso\Responses\Emails\ListResponse;
 use Conesso\Responses\Emails\MergeTagsResponse;
+use Conesso\Responses\Emails\RetrieveContentResponse;
 use Conesso\Responses\Emails\RetrieveResponse;
 use Conesso\Responses\Emails\TestResponse;
 use Conesso\Responses\Emails\TestWithListResponse;
@@ -110,5 +111,14 @@ final class Emails implements EmailsContract
         $response = $this->transporter->requestObject($payload);
 
         return UrlResponse::from($response->data());
+    }
+
+    public function retrieveContent(int $id, int $variationId): RetrieveContentResponse
+    {
+        $payload = Payload::list("emails/{$id}/variations/{$variationId}/versions", []);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return RetrieveContentResponse::from($response->data(), $response->meta());
     }
 }

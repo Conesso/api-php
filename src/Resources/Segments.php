@@ -65,7 +65,7 @@ final class Segments implements SegmentsContract
 
     public function refresh(int $id): RefreshResponse
     {
-        $payload = Payload::update('segments', (string) $id, [], 'refresh');
+        $payload = Payload::update('segments', (string) $id, [], '/refresh');
 
         $response = $this->transporter->requestObject($payload);
 

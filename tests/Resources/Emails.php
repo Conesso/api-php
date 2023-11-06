@@ -2,8 +2,10 @@
 
 use Conesso\Responses\Emails\CreateResponse;
 use Conesso\Responses\Emails\DeleteResponse;
+use Conesso\Responses\Emails\EmailVariationVersionResponse;
 use Conesso\Responses\Emails\ListResponse;
 use Conesso\Responses\Emails\MergeTagsResponse;
+use Conesso\Responses\Emails\RetrieveContentResponse;
 use Conesso\Responses\Emails\RetrieveResponse;
 use Conesso\Responses\Emails\TestResponse;
 use Conesso\Responses\Emails\TestWithListResponse;
@@ -151,4 +153,19 @@ test('merge urls', function () {
     expect($response)->toBeInstanceOf(MergeTagsResponse::class)
         ->id->toBe(1)
         ->mergedTags->toBeArray()->toBeEmpty();
+});
+
+test('retrieve variation versions', function () {
+    $client = mockConessoClient(
+        'GET',
+        'emails/1/variations/4/versions',
+        [],
+        Response::from(emailContentVariationListResource(), metaResource())
+    );
+
+    $response = $client->emails()->retrieveContent(1, 4);
+
+    expect($response)->toBeInstanceOf(RetrieveContentResponse::class)
+        ->variations->toBeArray()
+        ->variations->each->toBeInstanceOf(EmailVariationVersionResponse::class);
 });

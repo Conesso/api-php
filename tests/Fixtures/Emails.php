@@ -98,6 +98,28 @@ function emailBodyVariationVersionResource(): array
     ];
 }
 
+function emailContentVariationResource(): array
+{
+    return [
+        'versionId' => 21,
+        'versionUid' => 'e65bef774',
+        'updatedAt' => '2023-08-31T04:14:32.000Z',
+        'createdAt' => '2023-08-31T04:14:32.000Z',
+        'updatedBy' => 'Adam Paterson',
+        'createdBy' => 'Adam Paterson',
+        'content' => emailBodyVersionContentResource(),
+        'txtContent' => '',
+    ];
+}
+
+function emailContentVariationListResource(): array
+{
+    return [
+        emailContentVariationResource(),
+        emailContentVariationResource(),
+    ];
+}
+
 function emailBodyCurrentVersionResource(): array
 {
     return [

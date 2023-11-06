@@ -57,6 +57,13 @@ final class EmailsBodyVariationResponse implements ResponseContract
 
     public function toArray(): array
     {
-        // TODO: Implement toArray() method.
+        return [
+            'id' => $this->id,
+            'uid' => $this->uid,
+            'activeVersion' => $this->activeVersion,
+            'versionsCount' => $this->versionsCount,
+            'versions' => array_map(fn (EmailsBodyVersionResponse $version): array => $version->toArray(), $this->versions),
+            'rowVariations' => $this->rowVariations,
+        ];
     }
 }

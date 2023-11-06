@@ -6,12 +6,10 @@ namespace Conesso\Responses\Carts;
 
 use Conesso\Contracts\ResponseContract;
 use Conesso\Responses\Concerns\ArrayAccessible;
-use Conesso\Responses\Concerns\HasMetaInformation;
 
 final class RetrieveResponse implements ResponseContract
 {
     use ArrayAccessible;
-    use HasMetaInformation;
 
     public string $id;
 

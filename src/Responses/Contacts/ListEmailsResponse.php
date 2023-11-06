@@ -14,9 +14,9 @@ final class ListEmailsResponse implements ResponseContract
     use ArrayAccessible;
     use HasMetaInformation;
 
-    private array $emails;
+    public array $emails;
 
-    private ?MetaInformation $meta;
+    public ?MetaInformation $meta;
 
     public function __construct(array $emails, ?MetaInformation $meta)
     {
@@ -34,6 +34,9 @@ final class ListEmailsResponse implements ResponseContract
 
     public function toArray(): array
     {
-        // TODO: Implement toArray() method.
+        return [
+            'emails' => $this->emails,
+            'meta' => $this->meta,
+        ];
     }
 }

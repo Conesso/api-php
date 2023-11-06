@@ -8,6 +8,7 @@ use Conesso\Responses\Emails\CreateResponse;
 use Conesso\Responses\Emails\DeleteResponse;
 use Conesso\Responses\Emails\ListResponse;
 use Conesso\Responses\Emails\MergeTagsResponse;
+use Conesso\Responses\Emails\RetrieveContentResponse;
 use Conesso\Responses\Emails\RetrieveResponse;
 use Conesso\Responses\Emails\TestResponse;
 use Conesso\Responses\Emails\TestWithListResponse;
@@ -36,4 +37,6 @@ interface EmailsContract
     public function mergeTags(int $id): MergeTagsResponse;
 
     public function urls(int $id): UrlResponse;
+
+    public function retrieveContent(int $id, int $variationId): RetrieveContentResponse;
 }
