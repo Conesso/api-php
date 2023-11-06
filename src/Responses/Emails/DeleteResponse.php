@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Conesso\Responses\Segments;
+namespace Conesso\Responses\Emails;
 
 use Conesso\Contracts\ResponseContract;
 use Conesso\Responses\Concerns\ArrayAccessible;
@@ -21,12 +21,9 @@ final class DeleteResponse implements ResponseContract
         $this->deleted = $deleted;
     }
 
-    public static function from(array $data): self
+    public static function from(int $id, array $data): self
     {
-        return new self(
-            (int) $data['id'],
-            (bool) $data['deleted'],
-        );
+        return new self($id, $data['deleted'] ?? false);
     }
 
     public function toArray(): array

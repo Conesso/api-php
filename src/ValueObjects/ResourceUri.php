@@ -15,14 +15,14 @@ final class ResourceUri implements StringableContract
         $this->uri = $uri;
     }
 
-    public static function create(string $resource): self
+    public static function create(string $resource, string $suffix = null): self
     {
-        return new self($resource);
+        return new self("{$resource}{$suffix}");
     }
 
-    public static function update(string $resource, string $id): self
+    public static function update(string $resource, string $id, string $suffix = null): self
     {
-        return new self("{$resource}/{$id}");
+        return new self("{$resource}/{$id}{$suffix}");
     }
 
     public static function retrieve(string $resource, string $id, string $suffix = null): self

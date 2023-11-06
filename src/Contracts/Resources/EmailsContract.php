@@ -4,8 +4,16 @@ declare(strict_types=1);
 
 namespace Conesso\Contracts\Resources;
 
+use Conesso\Responses\Emails\CreateResponse;
+use Conesso\Responses\Emails\DeleteResponse;
 use Conesso\Responses\Emails\ListResponse;
+use Conesso\Responses\Emails\MergeTagsResponse;
 use Conesso\Responses\Emails\RetrieveResponse;
+use Conesso\Responses\Emails\TestResponse;
+use Conesso\Responses\Emails\TestWithListResponse;
+use Conesso\Responses\Emails\TriggerResponse;
+use Conesso\Responses\Emails\UpdateResponse;
+use Conesso\Responses\Emails\UrlResponse;
 
 interface EmailsContract
 {
@@ -13,19 +21,19 @@ interface EmailsContract
 
     public function list(array $parameters = []): ListResponse;
 
-    public function create(array $parameters): array;
+    public function create(array $parameters): CreateResponse;
 
-    public function update(string $id, array $parameters): array;
+    public function update(string $id, array $parameters): UpdateResponse;
 
-    public function delete(string $id): array;
+    public function delete(int $id): DeleteResponse;
 
-    public function trigger(string $id): array;
+    public function trigger(int $id, array $parameters = []): TriggerResponse;
 
-    public function test(string $id): array;
+    public function test(string $id): TestResponse;
 
-    public function testList(string $id, string $listId): array;
+    public function testList(string $id, string $listId): TestWithListResponse;
 
-    public function mergeTags(string $id): array;
+    public function mergeTags(int $id): MergeTagsResponse;
 
-    public function url(string $id): string;
+    public function urls(int $id): UrlResponse;
 }

@@ -47,7 +47,7 @@ final class Contacts implements ContactsContract
 
     public function update(int $id, array $parameters): UpdateResponse
     {
-        $payload = Payload::update('contacts', $id, $parameters);
+        $payload = Payload::update('contacts', (string) $id, $parameters);
 
         $response = $this->transporter->requestObject($payload);
 
@@ -56,18 +56,18 @@ final class Contacts implements ContactsContract
 
     public function delete(int $id): DeleteResponse
     {
-        $payload = Payload::delete('contacts', $id);
+        $payload = Payload::delete('contacts', (string) $id);
 
         $response = $this->transporter->requestObject($payload);
 
-        return DeleteResponse::from($response->data());
+        return DeleteResponse::from($id, $response->data());
     }
 
     public function emails(string $id, array $parameters = []): ListEmailsResponse
     {
         $payload = Payload::retrieve('contacts', $id, '/emails');
 
-        $response = $this->transporter->requestObject($payload, $parameters);
+        $response = $this->transporter->requestObject($payload);
 
         return ListEmailsResponse::from($response->data(), $response->meta());
     }

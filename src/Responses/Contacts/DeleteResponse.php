@@ -11,8 +11,26 @@ final class DeleteResponse implements ResponseContract
 {
     use ArrayAccessible;
 
+    public int $id;
+
+    public bool $deleted;
+
+    public function __construct(int $id, bool $deleted)
+    {
+        $this->id = $id;
+        $this->deleted = $deleted;
+    }
+
+    public static function from($id, array $data): self
+    {
+        return new self($id, $data['deleted'] ?? false);
+    }
+
     public function toArray(): array
     {
-        // TODO: Implement toArray() method.
+        return [
+            'id' => $this->id,
+            'deleted' => $this->deleted,
+        ];
     }
 }

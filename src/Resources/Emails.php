@@ -6,8 +6,16 @@ namespace Conesso\Resources;
 
 use Conesso\Contracts\Resources\EmailsContract;
 use Conesso\Resources\Concerns\Transportable;
+use Conesso\Responses\Emails\CreateResponse;
+use Conesso\Responses\Emails\DeleteResponse;
 use Conesso\Responses\Emails\ListResponse;
+use Conesso\Responses\Emails\MergeTagsResponse;
 use Conesso\Responses\Emails\RetrieveResponse;
+use Conesso\Responses\Emails\TestResponse;
+use Conesso\Responses\Emails\TestWithListResponse;
+use Conesso\Responses\Emails\TriggerResponse;
+use Conesso\Responses\Emails\UpdateResponse;
+use Conesso\Responses\Emails\UrlResponse;
 use Conesso\ValueObjects\Transporter\Payload;
 
 final class Emails implements EmailsContract
@@ -32,43 +40,75 @@ final class Emails implements EmailsContract
         return ListResponse::from($response->data(), $response->meta());
     }
 
-    public function create(array $parameters): array
+    public function create(array $parameters): CreateResponse
     {
-        // TODO: Implement create() method.
+        $payload = Payload::create('emails', $parameters);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return CreateResponse::from($response->data());
     }
 
-    public function update(string $id, array $parameters): array
+    public function update(string $id, array $parameters): UpdateResponse
     {
-        // TODO: Implement update() method.
+        $payload = Payload::update('emails', $id, $parameters);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return UpdateResponse::from($response->data());
     }
 
-    public function delete(string $id): array
+    public function delete(int $id): DeleteResponse
     {
-        // TODO: Implement delete() method.
+        $payload = Payload::delete('emails', (string) $id);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return DeleteResponse::from($id, $response->data());
     }
 
-    public function trigger(string $id): array
+    public function trigger(int $id, array $parameters = []): TriggerResponse
     {
-        // TODO: Implement trigger() method.
+        $payload = Payload::update('emails', (string) $id, $parameters, '/trigger');
+
+        $response = $this->transporter->requestObject($payload);
+
+        return TriggerResponse::from($id, $response->data());
     }
 
-    public function test(string $id): array
+    public function test(string $id, array $parameters = []): TestResponse
     {
-        // TODO: Implement test() method.
+        $payload = Payload::create("emails/{$id}", $parameters, '/test');
+
+        $response = $this->transporter->requestObject($payload);
+
+        return TestResponse::from((int) $id, $response->data());
     }
 
-    public function testList(string $id, string $listId): array
+    public function testList(string $id, string $listId): TestWithListResponse
     {
-        // TODO: Implement testList() method.
+        $payload = Payload::create("emails/{$id}", [], "/test/{$listId}");
+
+        $response = $this->transporter->requestObject($payload);
+
+        return TestWithListResponse::from((int) $id, (int) $listId, $response->data());
     }
 
-    public function mergeTags(string $id): array
+    public function mergeTags(int $id): MergeTagsResponse
     {
-        // TODO: Implement mergeTags() method.
+        $payload = Payload::create("emails/mergetags/{$id}", []);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return MergeTagsResponse::from($id, $response->data());
     }
 
-    public function url(string $id): string
+    public function urls(int $id): UrlResponse
     {
-        // TODO: Implement url() method.
+        $payload = Payload::list("emails/url/{$id}", []);
+
+        $response = $this->transporter->requestObject($payload);
+
+        return UrlResponse::from($response->data());
     }
 }

@@ -3,7 +3,6 @@
 use Conesso\Responses\Segments\CreateResponse;
 use Conesso\Responses\Segments\DeleteResponse;
 use Conesso\Responses\Segments\ListResponse;
-use Conesso\Responses\Segments\RefreshResponse;
 use Conesso\Responses\Segments\RetrieveResponse;
 use Conesso\Responses\Segments\SegmentConditionResponse;
 use Conesso\Responses\Segments\UpdateResponse;

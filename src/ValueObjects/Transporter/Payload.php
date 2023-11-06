@@ -31,11 +31,11 @@ final class Payload
         $this->parameters = $parameters;
     }
 
-    public static function create(string $resource, array $parameters): self
+    public static function create(string $resource, array $parameters, string $suffix = null): self
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'POST';
-        $uri = ResourceUri::create($resource);
+        $uri = ResourceUri::create($resource, $suffix);
 
         return new self($contentType, $method, $uri, $parameters);
     }
@@ -58,11 +58,11 @@ final class Payload
         return new self($contentType, $method, $uri);
     }
 
-    public static function update(string $resource, string $id, array $parameters): self
+    public static function update(string $resource, string $id, array $parameters, string $suffix = null): self
     {
         $contentType = 'application/json; charset=utf-8';
         $method = 'PUT';
-        $uri = ResourceUri::update($resource, $id);
+        $uri = ResourceUri::update($resource, $id, $suffix);
 
         return new self($contentType, $method, $uri, $parameters);
     }

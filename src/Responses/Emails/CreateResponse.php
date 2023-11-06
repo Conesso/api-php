@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Conesso\Responses\Segments;
+namespace Conesso\Responses\Emails;
 
 use Conesso\Contracts\ResponseContract;
 use Conesso\Responses\Concerns\ArrayAccessible;
 
-final class UpdateResponse implements ResponseContract
+final class CreateResponse implements ResponseContract
 {
     use ArrayAccessible;
 
-    public RetrieveResponse $segment;
+    public RetrieveResponse $email;
 
-    public function __construct(RetrieveResponse $segment)
+    public function __construct(RetrieveResponse $email)
     {
-        $this->segment = $segment;
+        $this->email = $email;
     }
 
     public static function from(array $data): self
@@ -26,7 +26,7 @@ final class UpdateResponse implements ResponseContract
     public function toArray(): array
     {
         return [
-            'segment' => $this->segment->toArray(),
+            'email' => $this->email->toArray(),
         ];
     }
 }

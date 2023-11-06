@@ -10,6 +10,11 @@ function emailListResource(): array
     return json_decode(emailsListResource(), true);
 }
 
+function emailTestResource(): array
+{
+    return [];
+}
+
 function emailSentResource(): array
 {
     return [
@@ -108,6 +113,32 @@ function emailBodyVersionContentResource(): array
         'jsonContent' => '{"page" {"body" {"rows" []}}}',
         'htmlContent' => '<html><head></head><body>EMAIL CONTENT</body></html>',
         'txtContent' => 'EMAIL CONTENT',
+    ];
+}
+
+function emailUrlsResource(): array
+{
+    return [
+        'https://www.facebook.com/',
+        'http://twitter.com/',
+        'https://instagram.com/',
+    ];
+}
+
+function emailsMergeTagsResource(): array
+{
+    return [
+        'mergeTags' => [
+            'tag1',
+            'tag2',
+        ],
+    ];
+}
+
+function emailSuccessActionResource(): array
+{
+    return [
+        'success' => true,
     ];
 }
 
