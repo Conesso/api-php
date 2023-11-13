@@ -5,13 +5,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.4 | ^8.0",
-        "php-http/discovery": "1.x-dev",
-        "psr/http-client": "1.0.x-dev",
+        "nyholm/psr7": "^1.8.1",
+        "php-http/discovery": "^1.19.1",
+        "psr/http-client": "^1.0.3",
         "psr/http-client-implementation": "*",
         "psr/http-factory-implementation": "*",
-        "psr/http-message": "2.0.x-dev",
-        "symfony/http-client": "6.4.x-dev",
-        "nyholm/psr7": "^1.8@dev"
+        "psr/http-message": "^2.0.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "7.9.x-dev",
