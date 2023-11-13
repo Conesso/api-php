@@ -2,19 +2,16 @@
     <img src="https://raw.githubusercontent.com/Conesso/api-php/develop/art/header.png" alt="Conesso header"/>
 </p>
 
+<p align="center">
+    <a href="https://www.conesso.io"><img src="https://img.shields.io/badge/CONESSO-blue?style=for-the-badge&logoColor=%23173E58"/></a>
+    <a href="https%3A%2F%2Fgithub.com%2FConesso%2Fapi-php%2Factions%2Fworkflows%2Ftests.yml"><img src="https://img.shields.io/github/actions/workflow/status/conesso/api-php/tests.yml?style=for-the-badge" /></a>
+    <a href="https%3A%2F%2Fpackagist.org%2Fpackages%2Fconesso%2Fclient"><img src="https://img.shields.io/packagist/v/conesso/client?style=for-the-badge" /></a>
+    <a href="https%3A%2F%2Fpackagist.org%2Fpackages%2Fconesso%2Fclient%2Fstats"><img src="https://img.shields.io/packagist/dt/conesso/client?style=for-the-badge"/></a>
+    
+</p>
+
 ---
 
-<p align="center">
-
-![Static Badge](https://img.shields.io/badge/CONESSO-blue?style=for-the-badge&logoColor=%23173E58&link=https%3A%2F%2Fwww.conesso.io%2F)
-
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/conesso/api-php/tests.yml?style=for-the-badge&link=https%3A%2F%2Fgithub.com%2FConesso%2Fapi-php%2Factions%2Fworkflows%2Ftests.yml)
-
-![Packagist Version (custom server)](https://img.shields.io/packagist/v/conesso/client?style=for-the-badge&link=https%3A%2F%2Fpackagist.org%2Fpackages%2Fconesso%2Fclient)
-
-![Packagist Downloads (custom server)](https://img.shields.io/packagist/dt/conesso/client?style=for-the-badge&link=https%3A%2F%2Fpackagist.org%2Fpackages%2Fconesso%2Fclient%2Fstats)
-
-</p>
 
 # Getting started
 
