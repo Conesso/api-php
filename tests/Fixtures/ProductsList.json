@@ -1,0 +1,79 @@
+[
+  {
+    "id": "4fb79610411f9bebf24a08e8def82e6e",
+    "apiReferenceId": "api-reference-123",
+    "dateCreated": null,
+    "dateUpdated": "2023-08-23T13:45:43.000Z",
+    "createdAt": "2023-08-23T13:45:44.000Z",
+    "updatedAt": "2023-08-23T13:45:44.000Z",
+    "sku": "SKU-123",
+    "groupType": "standalone-product",
+    "name": "Test Product",
+    "description": null,
+    "barcode": "1234567891013",
+    "uri": "htttps://somewebsite.com/catalog/product/view/id/11/s/api-reference-123/key/d2b14133c0d4e65b90ac497c02cdb88216f41f26d6ef5877d2406f688cf611c4/",
+    "priceTax": 2,
+    "originalPrice": null,
+    "price": 12,
+    "priceIncTax": 12,
+    "weight": 12,
+    "weightUnit": null,
+    "stockQuantity": 0,
+    "visibility": "public",
+    "status": "active",
+    "productImages": [
+      {
+        "id": "8c2b26e92605c610927c928851224800",
+        "productId": "d58c2b26e92605c610927c9288512248",
+        "uri": "http://your-site.com/products/images/314299838955987890",
+        "uriImageMd5": null,
+        "s3Url": null,
+        "s3ImageMd5": null,
+        "dateS3Built": null,
+        "imageName": "back",
+        "position": null
+      }
+    ],
+    "productCategories": [],
+    "productOptions": [],
+    "productLinks": [],
+    "childVariation": [],
+    "parentVariation": [],
+    "customFields": []
+  },
+  {
+    "id": "c504d171d074b0bee651fc039fc6b2da",
+    "apiReferenceId": "api-reference-456",
+    "dateCreated": "2023-08-23T13:43:26.000Z",
+    "dateUpdated": "2023-08-23T13:43:26.000Z",
+    "createdAt": "2023-08-23T13:43:27.000Z",
+    "updatedAt": "2023-08-23T13:43:27.000Z",
+    "sku": "SKU-456",
+    "groupType": "standalone-product",
+    "name": "api-reference-456",
+    "description": null,
+    "barcode": "api-reference-456",
+    "uri": "htttps://somewebsite.com/catalog/product/view/id/10/s/api-reference-456/key/d2b14133c0d4e65b90ac497c02cdb88216f41f26d6ef5877d2406f688cf611c4/",
+    "priceTax": 2,
+    "originalPrice": null,
+    "price": 33,
+    "priceIncTax": 33,
+    "weight": 33,
+    "weightUnit": null,
+    "stockQuantity": 0,
+    "visibility": "public",
+    "status": "disabled",
+    "productImages": [],
+    "productCategories": [],
+    "productOptions": [],
+    "productLinks": [],
+    "childVariation": [],
+    "parentVariation": [],
+    "customFields": [
+      {
+        "key": "registration date test mihir",
+        "value": "08/06/2023"
+      }
+    ]
+  }
+]

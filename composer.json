@@ -1,0 +1,70 @@
+{
+    "name": "conesso/client",
+    "description": "API client written in PHP for https://www.conesso.io/.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^7.4 | ^8.0",
+        "php-http/discovery": "1.x-dev",
+        "psr/http-client": "1.0.x-dev",
+        "psr/http-client-implementation": "*",
+        "psr/http-factory-implementation": "*",
+        "psr/http-message": "2.0.x-dev",
+        "symfony/http-client": "6.4.x-dev",
+        "nyholm/psr7": "^1.8@dev"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "7.9.x-dev",
+        "guzzlehttp/psr7": "2.6.x-dev",
+        "laravel/pint": "dev-main",
+        "nunomaduro/collision": "v7.x-dev",
+        "pestphp/pest": "2.x-dev",
+        "pestphp/pest-plugin-mock": "2.x-dev",
+        "pestphp/pest-plugin-watch": "2.x-dev",
+        "phpstan/phpstan": "1.11.x-dev",
+        "rector/rector": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Conesso\\": "src/"
+        },
+        "files": [
+            "src/Conesso.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Adam Paterson",
+            "email": "adam.paterson@pinpointdesigns.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "scripts": {
+        "lint": "pint -v",
+        "refactor": "rector --debug",
+        "test:lint": "pint --test -v",
+        "test:refactor": "rector --debug --dry-run",
+        "test:types": "phpstan analyse --ansi",
+        "test:types:pro": "phpstan --watch",
+        "test:unit": "pest --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:refactor",
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    }
+}
